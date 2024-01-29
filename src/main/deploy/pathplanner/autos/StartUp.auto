@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 3.0,
+      "y": 3.0
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "doNothing"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TwoMeterX"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TwoMeterXNEG"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TwoMeterY"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "TwoMeterYNEG"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
