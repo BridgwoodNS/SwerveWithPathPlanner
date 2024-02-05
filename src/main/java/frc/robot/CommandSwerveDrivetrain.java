@@ -1,5 +1,6 @@
 package frc.robot;
 
+import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 import com.ctre.phoenix6.StatusCode;
@@ -44,17 +45,33 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     private Notifier m_simNotifier = null;
     private double m_lastSimTime;
 
+    public boolean isLockedRotational = false; 
+    private final double rotationalKp = 0.02;
+
+    private final Limelight lime = Limelight.getInstance();
+
     private final SwerveRequest.ApplyChassisSpeeds autoRequest = new SwerveRequest.ApplyChassisSpeeds();   //.withDriveRequestType(DriveRequestType.Velocity);
+
+    double getRotationalSpeed(DoubleSupplier xboxInput) {
+        if (isLockedRotational && lime.getTag() == 7.0) {
+            return -(lime.getTx() * rotationalKp); 
+        }
+
+        return xboxInput.getAsDouble();
+    }
 
     public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
         configurePathPlanner();
+
         if (Utils.isSimulation()) {
             startSimThread();
         }
     }
-    public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules) {
+
+    public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules){
         super(driveTrainConstants, modules);
+
         configurePathPlanner();
         if (Utils.isSimulation()) {
             startSimThread();
@@ -62,27 +79,28 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     }
 
     private void configurePathPlanner() {
+
         double driveBaseRadius = 0;
+
         for (var moduleLocation : m_moduleLocations) {
             driveBaseRadius = Math.max(driveBaseRadius, moduleLocation.getNorm());
         }
 
-         NamedCommands.registerCommand("doNothing2", new WaitCommand(2));
-
+        NamedCommands.registerCommand("doNothing2", new WaitCommand(2));
 
         AutoBuilder.configureHolonomic(
-            ()->this.getState().Pose, // Supplier of current robot pose
+            () -> this.getState().Pose, // Supplier of current robot pose
             this::seedFieldRelative,  // Consumer for seeding pose against auto
             this::getCurrentRobotChassisSpeeds,
-            (speeds)->this.setControl(autoRequest.withSpeeds(speeds)), // Consumer of ChassisSpeeds to drive the robot
-            new HolonomicPathFollowerConfig(new PIDConstants(10, 0, 0),
-                                            new PIDConstants(10, 0, 0),
+            (speeds) -> this.setControl(autoRequest.withSpeeds(speeds)), // Consumer of ChassisSpeeds to drive the robot
+            new HolonomicPathFollowerConfig(new PIDConstants(3.05, 0, 0),
+                                            new PIDConstants(2.5, 0, 0),
                                             TunerConstants.kSpeedAt12VoltsMps,
                                             driveBaseRadius,
                                             new ReplanningConfig()),
 
 
- () -> {
+            () -> {
                     // Boolean supplier that controls when the path will be mirrored for the red alliance
                     // This will flip the path being followed to the red side of the field.
                     // THE ORIGIN WILL REMAIN ON THE BLUE SIDE

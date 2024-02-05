@@ -45,23 +45,23 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
 
-    if (UseLimelight) {    
+    // if (false) {    
       
-      var lastResult = LimelightHelpers.getLatestResults("limelight").targetingResults;
-      LimelightHelpers.setLEDMode_ForceOn("limelight");
-      LimelightHelpers.setLEDMode_ForceBlink("limelight");
+    //   var lastResult = LimelightHelpers.getLatestResults("limelight").targetingResults;
+    //   LimelightHelpers.setLEDMode_ForceOn("limelight");
+    //   LimelightHelpers.setLEDMode_ForceBlink("limelight");
 
-      Pose2d llPose = lastResult.getBotPose2d_wpiBlue();
-      System.out.println("///////////////////");
+    //   Pose2d llPose = lastResult.getBotPose2d_wpiBlue();
+    //  // System.out.println("///////////////////");
 
-      if (lastResult.valid) {
-        m_robotContainer.drivetrain.addVisionMeasurement(llPose, Timer.getFPGATimestamp());
-              System.out.println("..............");
+    //   if (lastResult.valid) {
+    //     m_robotContainer.drivetrain.addVisionMeasurement(llPose, Timer.getFPGATimestamp());
+    //          // System.out.println("..............");
 
-      }
+    //   }
 
     
-    }
+    // }
 
     // if (false) {    
       

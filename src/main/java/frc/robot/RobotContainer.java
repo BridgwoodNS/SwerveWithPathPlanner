@@ -21,7 +21,6 @@ import frc.robot.generated.TunerConstants;
 public class RobotContainer {
   private final SendableChooser<Command> autoChooser;
 
-
   private double MaxSpeed = 5; // 6 meters per second desired top speed *t3x*
   private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
@@ -48,10 +47,14 @@ public class RobotContainer {
         drivetrain.applyRequest(() -> drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
             .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-            .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+            .withRotationalRate(drivetrain.getRotationalSpeed(() -> -joystick.getRightX()) * MaxAngularRate) // Drive counterclockwise with negative X (left)
         ).ignoringDisable(true));
 
+
     joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
+    joystick.x().onTrue(drivetrain.runOnce(() -> {
+      drivetrain.isLockedRotational = !drivetrain.isLockedRotational;
+    }));
     joystick.b().whileTrue(drivetrain
         .applyRequest(() -> point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))));
 

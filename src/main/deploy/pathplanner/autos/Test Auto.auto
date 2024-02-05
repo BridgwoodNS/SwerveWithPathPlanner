@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.426728577964107,
-      "y": 5.624616329740343
+      "x": 1.1852004303152672,
+      "y": 5.4806715034257465
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -14,43 +14,37 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 1.5
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "TopRing"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
+            "pathName": "First Note"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "MidRing"
+            "pathName": "First Comeback"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 1.5
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BottomRing"
+            "pathName": "Second Note"
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 0.0
+            "pathName": "Second Comeback"
           }
         }
       ]

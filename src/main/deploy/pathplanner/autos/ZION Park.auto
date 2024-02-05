@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 3.0,
-      "y": 3.0
+      "x": 3.4053997519759753,
+      "y": 6.399391977474299
     },
     "rotation": 0
   },
@@ -12,21 +12,9 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "doNothing"
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "TwoMeterX"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "TwoMeterXNEG"
+            "pathName": "Zion park"
           }
         }
       ]

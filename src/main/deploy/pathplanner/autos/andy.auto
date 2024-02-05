@@ -2,55 +2,61 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.426728577964107,
-      "y": 5.624616329740343
+      "x": 0.6608862052352296,
+      "y": 6.647224304437511
     },
-    "rotation": 0.0
+    "rotation": 60.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "Andy test 1"
+          }
+        },
+        {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 1.5
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "TopRing"
+            "pathName": "Andy test 2"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 1.5
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "MidRing"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
+            "pathName": "Andy test 3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BottomRing"
+            "pathName": "andy test 4"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.0
+            "waitTime": 1.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "5th note"
           }
         }
       ]

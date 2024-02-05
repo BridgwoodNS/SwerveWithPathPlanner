@@ -2,37 +2,19 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.426728577964107,
-      "y": 5.624616329740343
+      "x": 0.82,
+      "y": 4.59113388815013
     },
-    "rotation": 0.0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
           "type": "path",
           "data": {
-            "pathName": "TopRing"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "MidRing"
+            "pathName": "1"
           }
         },
         {
@@ -44,13 +26,43 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BottomRing"
+            "pathName": "2"
           }
         },
         {
           "type": "wait",
           "data": {
             "waitTime": 0.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "5"
           }
         }
       ]

@@ -12,21 +12,9 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "doNothing"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "TwoMeterX"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "TwoMeterXNEG"
           }
         }
       ]
