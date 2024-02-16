@@ -3,45 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8379276830110018,
-        "y": 5.507130871149041
+        "x": 7.985708313259025,
+        "y": 7.454974110836125
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5001569895805271,
-        "y": 4.244162191365528
+        "x": 6.048944572916893,
+        "y": 6.968488431982414
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "pickup 1.26"
     },
     {
       "anchor": {
-        "x": 1.4267285779652068,
-        "y": 4.185419462073272
+        "x": 2.8913771479041297,
+        "y": 6.298423251674473
       },
       "prevControl": {
-        "x": 1.2876631287379974,
-        "y": 4.193847671117345
-      },
-      "nextControl": {
-        "x": 1.9113560946263224,
-        "y": 4.156048097427144
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.6,
-        "y": 4.08
-      },
-      "prevControl": {
-        "x": 2.2916006712156536,
-        "y": 4.00657158838468
+        "x": 5.204478866227434,
+        "y": 6.812445855746319
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "pickup 1.27"
     }
   ],
   "rotationTargets": [],
@@ -55,11 +39,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "best auto ever",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

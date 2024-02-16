@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
@@ -27,13 +27,14 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.Limelight;
 import frc.robot.generated.TunerConstants;
 
 /**
  * Class that extends the Phoenix SwerveDrivetrain class and implements subsystem
  * so it can be used in command-based projects easily.
  */
-public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsystem {
+public class Swerve extends SwerveDrivetrain implements Subsystem {
 
 //blargh
 //may need to add 
@@ -46,13 +47,13 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
     private double m_lastSimTime;
 
     public boolean isLockedRotational = false; 
-    private final double rotationalKp = 0.02;
+    private final double rotationalKp = 0.0265;
 
     private final Limelight lime = Limelight.getInstance();
 
     private final SwerveRequest.ApplyChassisSpeeds autoRequest = new SwerveRequest.ApplyChassisSpeeds();   //.withDriveRequestType(DriveRequestType.Velocity);
 
-    double getRotationalSpeed(DoubleSupplier xboxInput) {
+    public double getRotationalSpeed(DoubleSupplier xboxInput) {
         if (isLockedRotational && lime.getTag() == 7.0) {
             return -(lime.getTx() * rotationalKp); 
         }
@@ -60,7 +61,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         return xboxInput.getAsDouble();
     }
 
-    public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
+    public Swerve(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
         configurePathPlanner();
 
@@ -69,7 +70,7 @@ public class CommandSwerveDrivetrain extends SwerveDrivetrain implements Subsyst
         }
     }
 
-    public CommandSwerveDrivetrain(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules){
+    public Swerve(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules){
         super(driveTrainConstants, modules);
 
         configurePathPlanner();
