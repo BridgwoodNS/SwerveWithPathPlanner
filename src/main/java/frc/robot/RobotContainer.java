@@ -27,6 +27,7 @@ public class RobotContainer {
   /* Setting up bindings for necessary control of the swerve drive platform */
   private final CommandXboxController joystick = new CommandXboxController(0); // My joystick
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.DriveTrain; // My drivetrain
+  public final Intakerrrr intake = new Intakerrrr();
 
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(MaxSpeed * 0.10).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
@@ -61,6 +62,7 @@ public class RobotContainer {
     // reset the field-centric heading on left bumper press
     joystick.y().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
+    joystick.leftTrigger(0.2).whileTrue(intake.runIntake(()->joystick.getLeftTriggerAxis()));
     // if (Utils.isSimulation()) {
     //   drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
     // }

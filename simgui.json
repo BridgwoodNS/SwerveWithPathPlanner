@@ -1,4 +1,43 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "Talon FX (v6)[0]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[0]/Rotor Sensor": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[16]/Rotor Sensor": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[19]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[19]/Rotor Sensor": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[1]": {
+        "header": {
+          "open": true
+        }
+      },
+      "Talon FX (v6)[1]/Rotor Sensor": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
@@ -17,6 +56,12 @@
         }
       },
       "/Pose": {
+        "bottom": 1476,
+        "height": 8.210550308227539,
+        "left": 150,
+        "right": 2961,
+        "top": 79,
+        "width": 16.541748046875,
         "window": {
           "visible": true
         }
@@ -26,17 +71,6 @@
           "visible": true
         }
       }
-    }
-  },
-  "NetworkTables": {
-    "Persistent Values": {
-      "open": false
-    },
-    "Retained Values": {
-      "open": false
-    },
-    "Transitory Values": {
-      "open": false
     }
   },
   "NetworkTables Info": {
