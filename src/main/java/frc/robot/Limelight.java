@@ -12,7 +12,7 @@ public class Limelight extends SubsystemBase {
 
   private final NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
 
-  public static Limelight instance;
+  private static Limelight instance;
 
   public static Limelight getInstance() {
     if (instance == null) {
@@ -26,8 +26,6 @@ public class Limelight extends SubsystemBase {
 
   public double getTx() {
     // Only pull tx value for tag id #7
-    
-    
     return limelightTable.getValue("tx").getDouble();
   }
 

@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.8379276830110018,
-        "y": 5.507130871149041
+        "x": 4.929109614046088,
+        "y": 6.362676077183453
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.5001569895805271,
-        "y": 4.244162191365528
+        "x": 4.148896732861301,
+        "y": 7.592658736927697
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "pickup 3.23"
     },
     {
       "anchor": {
-        "x": 1.4267285779652068,
-        "y": 4.185419462073272
+        "x": 3.212641275444725,
+        "y": 6.9868463821287365
       },
       "prevControl": {
-        "x": 1.2876631287379974,
-        "y": 4.193847671117345
-      },
-      "nextControl": {
-        "x": 1.9113560946263224,
-        "y": 4.156048097427144
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 2.6,
-        "y": 4.08
-      },
-      "prevControl": {
-        "x": 2.2916006712156536,
-        "y": 4.00657158838468
+        "x": 3.6624110540075896,
+        "y": 7.326468459819062
       },
       "nextControl": null,
       "isLocked": false,
@@ -55,11 +39,11 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "best auto ever",
   "previewStartingState": null,
   "useDefaultConstraints": false
 }

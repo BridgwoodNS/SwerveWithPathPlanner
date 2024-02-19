@@ -5,12 +5,14 @@ import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrain.SwerveDriveState;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.networktables.DoubleArrayPublisher;
 import edu.wpi.first.networktables.DoublePublisher;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StringPublisher;
+import edu.wpi.first.networktables.StructPublisher;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -54,6 +56,8 @@ public class Telemetry {
     // private final DoublePublisher visionAngle = vision.getDoubleTopic("Vision Angle").publish();
 
 
+    private final NetworkTable vision = inst.getTable("Vision)");
+    private final StructPublisher<Pose3d> visionPose = vision.getStructTopic("Vision Pose", Pose3d.struct).publish();
 
     //private final DoublePublisher visionDistance = vision.getDoubleTopic("Vision Distance").publish();
 
@@ -101,6 +105,12 @@ public class Telemetry {
       //  fieldX.set(pose.getX());
        // fieldY.set(pose.getY());
       //  fieldAngle.set(pose.getRotation().getDegrees());
+
+        var lastResult = LimelightHelpers.getLatestResults("limelight").targetingResults;
+        if(lastResult.valid){
+            visionPose.set(lastResult.getBotPose3d_wpiBlue());
+        }
+
 
         /* Telemeterize the robot's general speeds */
         double currentTime = Utils.getCurrentTimeSeconds();
