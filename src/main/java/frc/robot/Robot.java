@@ -44,6 +44,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
+    //SmartDashboard.putNumber("AA_Angle off X axis", m_robotContainer.drivetrain.getState().Pose.getTranslation().getAngle().getDegrees()); 
+
 
     // if (false) {    
       

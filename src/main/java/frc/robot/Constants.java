@@ -4,6 +4,7 @@ public interface Constants {
 
     int intakeMotor1 = 30;
         int intakeMotor2 = 31;
+        int PivotMotor = 32;
 
 
 }

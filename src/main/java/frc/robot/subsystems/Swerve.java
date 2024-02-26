@@ -15,19 +15,27 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest.ApplyChassisSpeeds;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Limelight;
+import frc.robot.LimelightHelpers;
 import frc.robot.generated.TunerConstants;
 
 /**
@@ -49,6 +57,11 @@ public class Swerve extends SwerveDrivetrain implements Subsystem {
     public boolean isLockedRotational = false; 
     private final double rotationalKp = 0.0265;
 
+    //red and blue speaker pose
+    Pose2d redSpeakerPose = new Pose2d(16.55, 5.55, Rotation2d.fromDegrees(180));
+    Pose2d blueSpeakerPose = new Pose2d(0, 5.55, Rotation2d.fromDegrees(0));
+
+
     private final Limelight lime = Limelight.getInstance();
 
     private final SwerveRequest.ApplyChassisSpeeds autoRequest = new SwerveRequest.ApplyChassisSpeeds();   //.withDriveRequestType(DriveRequestType.Velocity);
@@ -56,6 +69,10 @@ public class Swerve extends SwerveDrivetrain implements Subsystem {
     public double getRotationalSpeed(DoubleSupplier xboxInput) {
         if (isLockedRotational && lime.getTag() == 7.0) {
             return -(lime.getTx() * rotationalKp); 
+        }
+
+              if (isLockedRotational && lime.getTag() == 4.0) {
+            return (lime.getTx() * rotationalKp); 
         }
 
         return xboxInput.getAsDouble();
@@ -122,8 +139,62 @@ public class Swerve extends SwerveDrivetrain implements Subsystem {
     }
 
     public Command getAutoPath(String pathName) {
+        
         return new PathPlannerAuto(pathName);
     }
+
+
+    public void applyVisiontoPose() {
+        //ToDo: Test STD Values
+
+        var visionResults = LimelightHelpers.getLatestResults("limelight").targetingResults;
+
+        if (visionResults.getBotPose2d_wpiBlue().getX() == 0.0) {
+            return;
+        }
+
+        double poseDifference = this.getState().Pose.getTranslation()
+                .getDistance(visionResults.getBotPose2d_wpiBlue().getTranslation());
+
+        if (visionResults.targets_Fiducials.length > 0) {
+            double xyStds;
+            double degStds;
+
+            // multiple targets detected
+            if (visionResults.targets_Fiducials.length >= 2) {
+                xyStds = 0.5;
+                degStds = 6;
+            }
+
+            // 1 target with large area and close to estimated pose
+            else if (visionResults.targets_Fiducials[0].ta > 0.8 && poseDifference < 0.5) {
+                xyStds = 1.0;
+                degStds = 12;
+            }
+
+            // 1 target farther away and estimated pose is close
+            else if (visionResults.targets_Fiducials[0].ta > 0.1 && poseDifference < 0.3) {
+                xyStds = 2.0;
+                degStds = 30;
+            }
+
+            // conditions don't match to add a vision measurement
+            else {
+                return;
+            }
+
+            this.addVisionMeasurement(visionResults.getBotPose2d_wpiBlue(),
+                    Timer.getFPGATimestamp() - (visionResults.botpose[6] / 1000.0),
+                    VecBuilder.fill(xyStds, xyStds, Units.degreesToRadians(degStds)));
+
+        }
+
+    }
+
+// public PathPlannerPath centerOnSpeakerPathCommand() {
+    
+//     );
+    
 
     public ChassisSpeeds getCurrentRobotChassisSpeeds() {
         return m_kinematics.toChassisSpeeds(getState().ModuleStates);
@@ -222,6 +293,8 @@ public class Swerve extends SwerveDrivetrain implements Subsystem {
             this.SteerRequestType = steerRequestType;
             return this;
         }
+
+        
     }
 
 

@@ -56,7 +56,7 @@ public class Telemetry {
     // private final DoublePublisher visionAngle = vision.getDoubleTopic("Vision Angle").publish();
 
 
-    private final NetworkTable vision = inst.getTable("Vision)");
+    private final NetworkTable vision = inst.getTable("Vision");
     private final StructPublisher<Pose3d> visionPose = vision.getStructTopic("Vision Pose", Pose3d.struct).publish();
 
     //private final DoublePublisher visionDistance = vision.getDoubleTopic("Vision Distance").publish();
@@ -106,10 +106,11 @@ public class Telemetry {
        // fieldY.set(pose.getY());
       //  fieldAngle.set(pose.getRotation().getDegrees());
 
-        var lastResult = LimelightHelpers.getLatestResults("limelight").targetingResults;
-        if(lastResult.valid){
-            visionPose.set(lastResult.getBotPose3d_wpiBlue());
-        }
+        /* Telmeterize Vision Pose */
+        // var lastResult = LimelightHelpers.getLatestResults("limelight").targetingResults;
+        // if(lastResult.valid && lastResult.getBotPose2d().getX() != 0.0){
+        //          visionPose.set(lastResult.getBotPose3d_wpiBlue());
+        // }
 
 
         /* Telemeterize the robot's general speeds */
